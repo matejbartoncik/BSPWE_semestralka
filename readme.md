@@ -1,6 +1,3 @@
-Jasně 👌 tady to máš přepsané do čistého a přehledného **Markdown (.md)** formátu – se sekcemi, kódy, poznámkami a zvýrazněním.
-
-Můžeš to rovnou uložit jako `SETUP.md`.
 
 ---
 
