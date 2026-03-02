@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  web:
+    image: php:8.2-apache
+    container_name: hosting_web
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      # Admin app (zatím placeholder) – bude servírovaná na /
+      - ./app:/var/www/html:rw
+      # Zákaznické weby – path-based hosting /~customer/ (mapování dodá Web tým)
+      - ./data/www:/srv/www:rw
+      # (později) apache config dodá Web tým:
+      # - ./docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
+    depends_on:
+      - db
+    networks:
+      - hosting_net
+
+  db:
+    image: mariadb:10.11
+    container_name: hosting_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./data/mariadb:/var/lib/mysql:rw
+      # (později) init skripty dodá DB tým:
+      # - ./docker/mariadb/init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "3306:3306"
+    networks:
+      - hosting_net
+
+  ftp:
+    image: stilliard/pure-ftpd
+    container_name: hosting_ftp
+    restart: unless-stopped
+    environment:
+      PUBLICHOST: "localhost"
+      # Dočasný test účet (později provisioning)
+      FTP_USER_NAME: ${FTP_TEST_USER}
+      FTP_USER_PASS: ${FTP_TEST_PASS}
+      FTP_USER_HOME: /home/${FTP_TEST_USER}
+      # Pasivní porty (domluvený rozsah)
+      ADDED_FLAGS: "--passiveportrange 30000:30009"
+    volumes:
+      # FTP musí vidět stejné weby jako web server
+      - ./data/www:/home:rw
+    ports:
+      - "2121:21"
+      - "30000-30009:30000-30009"
+    networks:
+      - hosting_net
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: hosting_pma
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "8081:80"
+    networks:
+      - hosting_net
+
+networks:
+  hosting_net:
+    driver: bridge
