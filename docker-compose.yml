@@ -13,7 +13,7 @@ services:
       # Zákaznické weby – path-based hosting /~customer/ (mapování dodá Web tým)
       - ./data/www:/srv/www:rw
       # (později) apache config dodá Web tým:
-      # - ./docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
+      - ./docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
     depends_on:
       - db
     networks:
