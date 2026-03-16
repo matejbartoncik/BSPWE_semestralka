@@ -1,7 +1,11 @@
 FROM php:8.2-apache
 
+# Instalace ovladačů pro MySQL
+RUN docker-php-ext-install pdo pdo_mysql
+
 RUN a2enmod rewrite
 
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+# Tady je změna cesty:
+COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-WORKDIR /srv/app
+WORKDIR /var/www/html
