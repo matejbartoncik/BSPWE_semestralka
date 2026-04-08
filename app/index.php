@@ -70,7 +70,12 @@ function build_base_url(?string $port = null): string
 
 function build_customer_url(string $customer): string
 {
-    return build_base_url() . '/~' . rawurlencode($customer) . '/';
+    $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    $scheme = $isHttps ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
+    
+    // Pro ukázku vždy použijeme jednoduchý subdoménový styl (např. customer.localhost:8080)
+    return sprintf('%s://%s.%s/', $scheme, rawurlencode($customer), $host);
 }
 
 function build_phpmyadmin_url(): string
@@ -516,6 +521,26 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
                         <div class="info-box">
                             <span>DB heslo</span>
                             <b><?= escape($customerHosting['db_password']) ?></b>
+                        </div>
+                        <div class="info-box">
+                            <span>FTP host</span>
+                            <b><?= escape($customerHosting['ftp_host'] ?? 'localhost') ?></b>
+                        </div>
+                        <div class="info-box">
+                            <span>FTP port</span>
+                            <b><?= escape((string) ($customerHosting['ftp_port'] ?? 2121)) ?></b>
+                        </div>
+                        <div class="info-box">
+                            <span>FTP login</span>
+                            <b><?= escape($customerHosting['ftp_user'] ?? $customerHosting['customer']) ?></b>
+                        </div>
+                        <div class="info-box">
+                            <span>FTP heslo</span>
+                            <b><?= escape($customerHosting['ftp_password'] ?? '') ?></b>
+                        </div>
+                        <div class="info-box">
+                            <span>FTP public root</span>
+                            <b><?= escape($customerHosting['ftp_home'] ?? customer_public_path($customerHosting['customer'])) ?></b>
                         </div>
                     </div>
                 </section>
