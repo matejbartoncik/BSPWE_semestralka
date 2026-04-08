@@ -1,0 +1,23 @@
+# Data and state directories
+/data
+/.env
+.env.*
+
+# Application state
+.hostings.json
+
+# Composer
+/vendor/
+composer.phar
+
+# Node
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
