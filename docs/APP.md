@@ -16,8 +16,8 @@ Tato aplikace slouží k administrátorské správě a automatickému zakládán
 
 ### 3. Provisioning databáze a FTP (Iterace 2)
 - **MariaDB**: Skript automaticky vytváří databázi `cust{customer}db` a dedikovaného uživatele.
-- **FTP**: Generují se unikátní credentials pro přístup přes port 2121.
-- **Credentials**: Veškeré údaje jsou bezpečně zapsány do souboru `db_credentials.txt` ve složce zákazníka.
+- **FTP**: Generuje se vlastní FTP účet pro každého zákazníka s domovskou složkou `public` a přístupem přes port 2121.
+- **Credentials**: Veškeré údaje jsou bezpečně zapsány do souboru `hosting_credentials.txt` ve složce zákazníka.
 
 ## Technické požadavky
 - PHP 8.2 s rozšířením `pdo_mysql` (řešeno přes vlastní Dockerfile).
