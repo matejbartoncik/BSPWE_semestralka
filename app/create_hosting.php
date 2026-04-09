@@ -75,7 +75,7 @@ function build_base_url(?string $port = null): string
 {
     $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
     $scheme = $isHttps ? 'https' : 'http';
-    $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
     $hostWithoutPort = preg_replace('/:\d+$/', '', $host) ?: 'localhost';
 
     if ($port === null) {
@@ -89,10 +89,10 @@ function build_customer_url(string $customer): string
 {
     $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
     $scheme = $isHttps ? 'https' : 'http';
-    $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
     
-    // Pro ukázku vždy použijeme jednoduchý subdoménový styl (např. customer.localhost:8080)
-    return sprintf('%s://%s.%s/', $scheme, rawurlencode($customer), $host);
+    // Pro ukázku vždy použijeme jednoduchý subdoménový styl (např. customer.localhost)
+    return sprintf('%s://www.%s.cz/', $scheme, rawurlencode($customer));
 }
 
 function build_phpmyadmin_url(): string
