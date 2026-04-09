@@ -4,12 +4,12 @@
 
 Apache musí zachovat:
 
-- `http://localhost:8080/` → admin app (`./app`)
-- `http://customer.localhost:8080/` → `data/www/customer/public/`
-
+- `http://localhost/` → admin app (`./app`)
+- `http://localhost/customer.cz/` → `data/www/customer/public/`
+- vše se mapuje na port 80 (standartní port pro prohlížeče)
 Obecně:
 
-- `http://localhost:8080/~{name}/` nebo `http://{name}.localhost:8080/`  → `data/www/{name}/public/`
+- `http://localhost/~{name}/` → `data/www/{name}/public/`
 
 ## Implementace
 
