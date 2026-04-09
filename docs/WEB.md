@@ -5,11 +5,11 @@
 Apache musí zachovat:
 
 - `http://localhost:8080/` → admin app (`./app`)
-- `http://localhost:8080/~customer/` → `data/www/customer/public/`
+- `http://customer.localhost:8080/` → `data/www/customer/public/`
 
 Obecně:
 
-- `http://localhost:8080/~{name}/` → `data/www/{name}/public/`
+- `http://localhost:8080/~{name}/` nebo `http://{name}.localhost:8080/`  → `data/www/{name}/public/`
 
 ## Implementace
 

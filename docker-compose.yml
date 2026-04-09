@@ -67,6 +67,16 @@ services:
     networks:
       - hosting_net
 
+  docs:
+    image: squidfunk/mkdocs-material
+    container_name: hosting_docs
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/docs
+    command: serve -a 0.0.0.0:8000
+
 networks:
   hosting_net:
     driver: bridge
