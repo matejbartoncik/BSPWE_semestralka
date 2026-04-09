@@ -281,6 +281,14 @@ try {
 
     save_hostings($hostings);
 
+    // Zápis do hostitelského /etc/hosts (pokud je připojený do kontejneru a zapisovatelný)
+    $hostRecords = "\n127.0.0.1 www.{$customer}.cz {$customer}.cz # BSPWE AUTO GENERATED\n";
+    if (is_writable('/host_etc_hosts')) {
+        file_put_contents('/host_etc_hosts', $hostRecords, FILE_APPEND);
+    } else {
+        error_log("Soubor /host_etc_hosts neni zapisovatelny!");
+    }
+
     $credentials = [
         '[HOSTING]',
         'Nazev: ' . $customer,
