@@ -15,8 +15,10 @@ services:
       # apache config – pro nastavení virtual hostů, přesměrování atd.
       - ./docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
       # FTP - přístup k users db, pro manipulaci přes pure-pw
-      - ./data/ftp/passwd:/etc/pure-ftpd/passwd:rw      # Dynamicka zmena zaznamu na hostitelskem stroji (vyzaduje chmod 666 /etc/hosts na hostiteli)
-      - /etc/hosts:/host_etc_hosts:rw    depends_on:
+      - ./data/ftp/passwd:/etc/pure-ftpd/passwd:rw
+      # Dynamicka zmena zaznamu na hostitelskem stroji (vyzaduje chmod 666 /etc/hosts na hostiteli)
+      - /etc/hosts:/host_etc_hosts:rw
+    depends_on:
       - db
     networks:
       - hosting_net
