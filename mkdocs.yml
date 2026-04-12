@@ -5,6 +5,7 @@ theme:
 nav:
   - Home: index.md
   - Aplikace: APP.md
+  - Bezpečnost: SECURITY.md
   - Databáze: DB.md
   - FTP: FTP.md
   - Web: WEB.md
