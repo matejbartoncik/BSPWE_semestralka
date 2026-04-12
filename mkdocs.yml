@@ -9,3 +9,6 @@ nav:
   - FTP: FTP.md
   - Web: WEB.md
   - Jak na MkDocs: mkdocs_tutorial.md
+
+markdown_extensions:
+  - admonition
