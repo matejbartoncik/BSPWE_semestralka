@@ -10,6 +10,7 @@ nav:
   - FTP: FTP.md
   - Web: WEB.md
   - Jak na MkDocs: mkdocs_tutorial.md
+  - Návod pro klienty: USER_GUIDE.md
 
 markdown_extensions:
   - admonition
