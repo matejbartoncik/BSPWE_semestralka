@@ -1,0 +1,15 @@
+site_name: BSPWE Hosting Documentation
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Aplikace: APP.md
+  - Bezpečnost: SECURITY.md
+  - Databáze: DB.md
+  - FTP: FTP.md
+  - Web: WEB.md
+  - Jak na MkDocs: mkdocs_tutorial.md
+
+markdown_extensions:
+  - admonition
