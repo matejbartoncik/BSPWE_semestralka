@@ -2,12 +2,15 @@
 
 Tento projekt představuje jednoduché hostingové prostředí vytvořené pomocí Docker Compose. Cílem je simulovat základní principy webhostingu, kde administrátor vytváří hosting pro zákazníky a zákazníci následně spravují své weby, soubory a databáze.
 
-Dokumentace je rozdělena do několika částí:
+Dokumentace je rozdělena do těchto částí:
 
-- Aplikace (App) - popis aplikační vrstvy  
-- Databáze (DB) - popis databázové vrstvy  
-- FTP (FTP) - správa uživatelů a souborů  
-- Web (Web) - webový server a směrování požadavků  
+- [Aplikace](APP.md) - popis aplikační vrstvy
+- [Bezpečnost](SECURITY.md) - bezpečnostní pravidla a doporučení
+- [Databáze](DB.md) - popis databázové vrstvy
+- [FTP](FTP.md) - správa uživatelů a souborů
+- [Web](WEB.md) - webový server a směrování požadavků
+- [Jak na MkDocs](mkdocs_tutorial.md) - práce s dokumentací a její správa
+- [Návod pro klienty](USER_GUIDE.md) - základní používání hostingu pro zákazníka
 
 ---
 
@@ -21,7 +24,7 @@ cd BSPWE_semestralka
 ```
 
 !!! TIP
-    Doporučuje se projekt klonovat do prostředí WSL (např. `~/projects`), nikoli do Windows disku `C:\`, kvůli výkonu a práci s právy.
+    Doporučuje se projekt klonovat do prostředí WSL (např. `~/projects`),nebo na Linuxové distribuce.Nikoli do Windows disku `C:\`, kvůli výkonu a práci s právy.
 
 ---
 
@@ -30,7 +33,7 @@ cd BSPWE_semestralka
 Před prvním spuštěním je nutné vytvořit konfigurační soubor `.env`:
 
 ```bash
-cp .env.example .env
+cp .env
 ```
 
 Soubor obsahuje proměnné prostředí, například heslo k databázi.
@@ -61,7 +64,7 @@ Pro spuštění je potřeba:
 
 - **Docker** 
 - **Docker Compose** 
-- **(doporučeno) WSL2 na Windows** 
+- **WSL2 na Windows** 
 
 Volné porty:
 
@@ -132,6 +135,7 @@ app/                # administrační aplikace
 data/www/           # zákaznické weby
 data/mariadb/       # data databáze
 docker/apache/      # konfigurace Apache
+docker/ftp/         # konfigurace FTP
 docs/               # dokumentace (MkDocs)
 docker-compose.yml  # definice služeb
 ```
