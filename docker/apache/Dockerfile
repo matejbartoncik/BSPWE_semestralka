@@ -16,8 +16,9 @@ RUN a2enmod rewrite vhost_alias
 COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/apache/start-web.sh /usr/local/bin/start-web.sh
 
-RUN chmod +x /usr/local/bin/start-web.sh
+RUN sed -i 's/\r$//' /usr/local/bin/start-web.sh \
+	&& chmod +x /usr/local/bin/start-web.sh
 
 WORKDIR /var/www/html
 
-CMD ["/usr/local/bin/start-web.sh"]
+CMD ["sh", "/usr/local/bin/start-web.sh"]
