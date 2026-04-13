@@ -406,14 +406,14 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
     <div class="container">
         <header class="hero">
             <div>
-                <h1>Hosting Panel</h1>
-                <p>Admin vytvori hosting a zakaznik si pak nahraje svuj web jen do sve slozky a vidi jen svoji databazi.</p>
+                <h1>Hosting panel</h1>
+                <p>Admin vytvoří hosting a zákazník si pak nahraje svůj web jen do své složky a vidí jen svou databázi.</p>
             </div>
 
             <?php if ($isAdminLoggedIn): ?>
-                <a href="?logout=admin" class="btn-logout">Odhlasit admina</a>
+                <a href="?logout=admin" class="btn-logout">Odhlásit admina</a>
             <?php elseif ($customerHosting !== null): ?>
-                <a href="?logout=customer" class="btn-logout">Odhlasit zakaznika</a>
+                <a href="?logout=customer" class="btn-logout">Odhlásit zákazníka</a>
             <?php endif; ?>
         </header>
 
@@ -430,7 +430,7 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <p class="note">Tohle jsou vygenerovane udaje pro zakaznika. Po refreshi uz se znovu neukazou.</p>
+                    <p class="note">Tohle jsou vygenerované údaje pro zákazníka. Po refreshi už se znovu neukážou.</p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
@@ -438,8 +438,8 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
         <?php if (!$isAdminLoggedIn && $customerHosting === null): ?>
             <div class="grid two-columns">
                 <section class="card">
-                    <h2>Admin prihlaseni</h2>
-                    <p>Admin pres tuhle cast zalozi novy hosting a vygeneruje udaje pro zakaznika.</p>
+                    <h2>Admin přihlášení</h2>
+                    <p>Admin přes tuhle část založí nový hosting a vygeneruje údaje pro zákazníka.</p>
 
                     <form method="post" class="stack-form">
                         <input type="hidden" name="action" value="admin_login">
@@ -449,42 +449,42 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
                 </section>
 
                 <section class="card">
-                    <h2>Zakaznicky portal</h2>
-                    <p>Zakaznik vidi jen vlastni hosting, vlastni soubory a vlastni DB udaje.</p>
+                    <h2>Zákaznický portál</h2>
+                    <p>Zákazník vidí jen vlastní hosting, vlastní soubory a vlastní DB údaje.</p>
 
                     <form method="post" class="stack-form">
                         <input type="hidden" name="action" value="customer_login">
                         <input type="text" name="portal_user" placeholder="Login hostingu" required>
-                        <input type="password" name="password" placeholder="Heslo zakaznika" required>
-                        <button type="submit" class="btn-secondary">Prihlasit se jako zakaznik</button>
+                        <input type="password" name="password" placeholder="Heslo zákazníka" required>
+                        <button type="submit" class="btn-secondary">Přihlásit se jako zákazník</button>
                     </form>
                 </section>
             </div>
         <?php elseif ($isAdminLoggedIn): ?>
             <div class="grid admin-layout">
                 <section class="card large-card">
-                    <h2>Vytvorit novy hosting</h2>
-                    <p>Vznikne slozka, databaze a prihlaseni do zakaznickeho portalu.</p>
+                    <h2>Vytvořit nový hosting</h2>
+                    <p>Vznikne složka, databáze a přihlášení do zákaznického portálu.</p>
 
                     <form action="create_hosting.php" method="post" class="stack-form">
-                        <input type="text" name="customer_name" placeholder="napr. alfa, beta, web1" required>
-                        <button type="submit" class="btn-create">Vytvorit hosting</button>
+                        <input type="text" name="customer_name" placeholder="např. alfa, beta, web1" required>
+                        <button type="submit" class="btn-create">Vytvořit hosting</button>
                     </form>
                 </section>
 
                 <section class="card">
-                    <h2>Existujici hostingy</h2>
+                    <h2>Existující hostingy</h2>
 
                     <?php if ($hostings === []): ?>
-                        <p>Zatim tu nejsou zadne hostingy.</p>
+                        <p>Zatím tu nejsou žádné hostingy.</p>
                     <?php else: ?>
                         <div class="hosting-list">
                             <?php foreach ($hostings as $hosting): ?>
                                 <div class="hosting-item">
                                     <b><?= escape($hosting['customer']) ?></b>
-                                    <span>Portal login: <?= escape($hosting['portal_user']) ?></span>
+                                    <span>Portál login: <?= escape($hosting['portal_user']) ?></span>
                                     <span>DB: <?= escape($hosting['db_name']) ?></span>
-                                    <a href="<?= escape(build_customer_url($hosting['customer'])) ?>" target="_blank" rel="noreferrer">Otevrit web</a>
+                                    <a href="<?= escape(build_customer_url($hosting['customer'])) ?>" target="_blank" rel="noreferrer">Otevřít web</a>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -494,8 +494,8 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
         <?php elseif ($customerHosting !== null): ?>
             <div class="grid customer-layout">
                 <section class="card large-card">
-                    <h2>Muj hosting: <?= escape($customerHosting['customer']) ?></h2>
-                    <p>Odsud muzes nahrat svuj web do vlastni slozky a zobrazit si pristupy k databazi.</p>
+                    <h2>Můj hosting: <?= escape($customerHosting['customer']) ?></h2>
+                    <p>Odsud můžeš nahrát svůj web do vlastní složky a zobrazit si přístupy k databázi.</p>
 
                     <div class="info-grid">
                         <div class="info-box">
@@ -503,7 +503,7 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
                             <b><a href="<?= escape(build_customer_url($customerHosting['customer'])) ?>" target="_blank" rel="noreferrer"><?= escape(build_customer_url($customerHosting['customer'])) ?></a></b>
                         </div>
                         <div class="info-box">
-                            <span>Public slozka</span>
+                            <span>Public složka</span>
                             <b><?= escape(customer_public_path($customerHosting['customer'])) ?></b>
                         </div>
                         <div class="info-box">
@@ -546,32 +546,32 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
                 </section>
 
                 <section class="card">
-                    <h2>Nahrat web</h2>
-                    <p>Vyber soubory nebo celou slozku webu. Nahraje se jen do tveho vlastniho `public` adresare.</p>
+                    <h2>Nahrát web</h2>
+                    <p>Vyber soubory nebo celou složku webu. Nahraje se jen do tvého vlastního `public` adresáře.</p>
 
                     <form method="post" enctype="multipart/form-data" class="stack-form">
                         <input type="hidden" name="action" value="customer_upload">
                         <input type="file" name="site_files[]" multiple webkitdirectory directory required>
                         <label class="checkbox-row">
                             <input type="checkbox" name="clear_public" value="1">
-                            <span>Pred nahranim smazat aktualni obsah public</span>
+                            <span>Před nahráním smazat aktuální obsah public</span>
                         </label>
-                        <button type="submit">Nahrat soubory</button>
+                        <button type="submit">Nahrát soubory</button>
                     </form>
                 </section>
 
                 <section class="card">
-                    <h2>Sprava DB</h2>
-                    <p>Nejjednodussi varianta je pouzit phpMyAdmin pres vlastni DB ucet, takze uvidis jen svoji databazi.</p>
-                    <a class="db-link" href="<?= escape(build_phpmyadmin_url()) ?>" target="_blank" rel="noreferrer">Otevrit phpMyAdmin</a>
+                    <h2>Správa DB</h2>
+                    <p>Nejjednodušší varianta je použít phpMyAdmin přes vlastní DB účet, takže uvidíš jen svoji databázi.</p>
+                    <a class="db-link" href="<?= escape(build_phpmyadmin_url()) ?>" target="_blank" rel="noreferrer">Otevřít phpMyAdmin</a>
                 </section>
             </div>
 
             <section class="card files-card">
-                <h2>Nahrane soubory</h2>
+                <h2>Nahrané soubory</h2>
 
                 <?php if ($files === []): ?>
-                    <p>V public slozce zatim nejsou zadne soubory.</p>
+                    <p>V public složce zatím nejsou žádné soubory.</p>
                 <?php else: ?>
                     <div class="table-wrap">
                         <table>

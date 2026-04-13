@@ -191,7 +191,7 @@ cd BSPWE_semestralka
 V rootu repa:
 
 ```bash
-cp .env.example .env
+cp .env
 ```
 
 ---
@@ -216,7 +216,7 @@ docker compose up -d
 
 | Služba          | URL                                            |
 | --------------- | ---------------------------------------------- |
-| Web (admin app) | [http://localhost:8080](http://localhost:8080) |
+| Web (admin app) | [http://localhost:80](http://localhost:80) |
 | phpMyAdmin      | [http://localhost:8081](http://localhost:8081) |
 
 ---
@@ -235,7 +235,7 @@ docker compose down
 * ✅ Docker se spouští přes `docker compose` ve WSL
 * ❌ `.env` se **necommituje**
 * ✅ Committuje se jen `.env.example`
-* ✅ Porty držíme fixní (8080 / 8081 / 3306 / 2121 …)
+* ✅ Porty držíme fixní (808 / 8081 / 3306 / 2121 …)
 * ✅ Změny přes PR (žádné přímé push do `main`)
 
 ---
@@ -259,7 +259,7 @@ Viz krok 5 (docker group + `wsl --shutdown`)
 
 ---
 
-## C) „Nejde mi otevřít localhost:8080“
+## C) „Nejde mi otevřít localhost:80“
 
 Zkontroluj:
 
@@ -271,9 +271,3 @@ docker compose logs web --tail=50
 ---
 
 ---
-
-Pokud chceš, můžu ti to ještě:
-
-* 🔹 přepsat do více „produkční“ dokumentace
-* 🔹 přidat sekci pro JetBrains + WSL
-* 🔹 nebo upravit do README stylu pro GitHub (víc badge, struktura, atd.)
