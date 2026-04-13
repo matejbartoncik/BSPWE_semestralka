@@ -11,6 +11,32 @@ Dokumentace je rozdělena do několika částí:
 
 ---
 
+## Stažení projektu
+
+Projekt je možné stáhnout z GitHubu pomocí:
+
+```bash
+git clone https://github.com/matejbartoncik/BSPWE_semestralka.git
+cd BSPWE_semestralka
+```
+
+!!! TIP
+    Doporučuje se projekt klonovat do prostředí WSL (např. `~/projects`), nikoli do Windows disku `C:\`, kvůli výkonu a práci s právy.
+
+---
+
+## Konfigurace prostředí
+
+Před prvním spuštěním je nutné vytvořit konfigurační soubor `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Soubor obsahuje proměnné prostředí, například heslo k databázi.
+
+---
+
 ## Spuštění projektu
 
 Projekt se spouští v kořenové složce pomocí příkazu:
@@ -56,6 +82,9 @@ Po spuštění projektu:
 - **phpMyAdmin** -> [http://localhost:8081](http://localhost:8081)
 - **Dokumentace** -> [http://localhost:8000](http://localhost:8000) 
 
+!!! info "Poznámka"
+    V zadání je uveden port 8080, ale v tomto projektu je webový server mapován na portu 80, proto je dostupný na `http://localhost`.
+
 ---
 
 ## Kontejnery
@@ -70,15 +99,60 @@ Projekt obsahuje tyto kontejnery:
 
 ---
 
+## Popis služeb
+
+- **web (hostin_web)**
+
+    Apache + PHP server, který obsluhuje administrační aplikaci a zákaznické weby
+
+- **db (hosting_db)**
+
+    MariaDB databáze pro ukládání dat aplikace
+
+- **ftp (hosting_ftp)**
+
+    FTP server pro správu souborů zákazníků
+
+- **pma (hosting_pma)**
+
+    phpMyAdmin pro správu databáze přes webové rozhraní
+
+- **docs (hosting_docs)**
+
+    Dokumentace projektu běžící na MkDocs
+
+---
+
+## Struktura projektu
+
+Základní struktura projektu:
+
+```bash
+app/                # administrační aplikace
+data/www/           # zákaznické weby
+data/mariadb/       # data databáze
+docker/apache/      # konfigurace Apache
+docs/               # dokumentace (MkDocs)
+docker-compose.yml  # definice služeb
+```
+
+---
+
 ## Síťové propojení
 
 Všechny služby jsou propojeny v jedné Docker síti:
 
-- **hosting_net**
+- **hosting_net** 
 
 Typ sítě:
 
 - **bridge**
 
+Díky tomu mohou kontejnery komunikovat mezi sebou pomocí názvů služeb:
+
+- `web -> db` (připojení k databázi)
+- `pma -> db` (phpMyAdmin)
+- `ftp -> web` (sdílené soubory)
+
 !!! info "Tip"
-    Kontejnery komunikují pomocí názvů služeb (např. **web -> db**).
+    Docker automaticky zajišťuje DNS překlad názvů služeb v rámci sítě.

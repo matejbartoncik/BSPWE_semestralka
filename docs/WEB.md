@@ -370,6 +370,46 @@ Tento blok zajišťuje:
 
 ---
 
+## Mapování domén pomocí `/etc/hosts`
+
+Aby bylo možné používat vlastní testovací domény (např. `teri.cz` nebo `www.teri.cz`), je nutné upravit soubor `/etc/hosts` na hostitelském systému.
+
+Příklad:
+
+```bash
+127.0.0.1 teri.cz
+127.0.0.1 www.teri.cz
+```
+
+Tímto se zajistí, že požadavky na tyto domény budou směrovány na lokální Apache server.
+
+V projektu je soubor `/etc/hosts` zároveň připojen do kontejneru:
+
+```yaml
+- /etc/hosts:/host_etc_hosts:rw
+```
+
+Díky tomu může aplikace případně dynamicky upravovat doménové záznamy přímo na hostitelském systému.
+
+!!! warning "Pozor"
+    Úprava souboru `/etc/hosts` vyžaduje administrátorská práva.
+
+---
+
+## Struktura zákaznických webů
+
+Zákaznické weby jsou ukládány ve složce:
+
+`data/www/{uzivatel}/public`
+
+Například:
+
+`data/www/teri/public/index.php`
+
+Tato struktura odpovídá běžnému webhostingu, kde každý zákazník má vlastní root adresář.
+
+---
+
 ## Shrnutí
 
 Webový server v tomto projektu umožňuje:
