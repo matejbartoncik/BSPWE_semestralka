@@ -8,13 +8,12 @@ Webová část projektu je postavena na vlastním Docker image založeném na of
 
 Webový server v projektu zajišťuje několik funkcí současně:
 
-- běh hlavní administrátorské aplikace na adrese `http://localhost`
+- běh hlavní administrátorské aplikace na adrese `http://localhost:8080`
 - obsluhu zákaznických webů uložených ve složce `data/www`
-- podporu adresářového hostingu přes `http://localhost/~uzivatel`
-- podporu subdoménového hostingu přes `http://uzivatel.localhost`
+- podporu adresářového hostingu přes `http://localhost:8080/~uzivatel`
+- podporu subdoménového hostingu přes `http://uzivatel.localhost:8080`
 - podporu testovacích domén přes aliasy `*.cz`, `*.nip.io` a `*.sslip.io`
 
-Všechny požadavky jsou mapovány na port `80`, což je standardní HTTP port pro webový server.
 
 ---
 
@@ -152,7 +151,7 @@ Projekt podporuje několik způsobů směrování požadavků.
 Hlavní administrační rozhraní běží na adrese:
 
 ```md
-http://localhost
+http://localhost:8080
 ```
 
 Apache zde používá:
@@ -161,7 +160,7 @@ Apache zde používá:
 DocumentRoot /var/www/html
 ```
 
-To znamená, že při přístupu na `localhost` se obsluhuje obsah ze složky `app`.
+To znamená, že při přístupu na `localhost:8080` se obsluhuje obsah ze složky `app`.
 
 ---
 
@@ -170,7 +169,7 @@ To znamená, že při přístupu na `localhost` se obsluhuje obsah ze složky `a
 Pro zpětnou kompatibilitu je podporován také adresářový hosting ve tvaru:
 
 ```md
-http://localhost/~uzivatel
+http://localhost:8080/~uzivatel
 ```
 
 Tento způsob je definován direktivou:
@@ -182,7 +181,7 @@ AliasMatch ^/~([A-Za-z0-9._-]+)(/.*)?$ /srv/www/$1/public$2
 Například adresa:
 
 ```md
-http://localhost/~teri
+http://localhost:8080/~teri
 ```
 
 se přeloží na složku:
@@ -200,7 +199,7 @@ To znamená, že jméno uživatele je součástí cesty URL a Apache podle něj 
 Další možností je subdoménový hosting ve tvaru:
 
 ```md
-http://uzivatel.localhost
+http://uzivatel.localhost:8080
 ```
 
 Tento způsob je definován pomocí:
@@ -215,7 +214,7 @@ Proměnná `%1` znamená první část domény, tedy subdoménu.
 Například:
 
 ```md
-http://rohliky.localhost
+http://rohliky.localhost:8080
 ```
 
 se namapuje na složku:
@@ -264,7 +263,7 @@ Obě varianty tedy povedou do stejné složky:
 Příklad:
 
 ```md
-http://localhost/~uzivatel
+http://localhost:8080/~uzivatel
 ```
 
 Charakteristika:
@@ -288,7 +287,7 @@ Charakteristika:
 Příklad:
 
 ```md
-http://uzivatel.localhost
+http://uzivatel.localhost:8080
 ```
 
 Charakteristika:
@@ -421,4 +420,4 @@ Webový server v tomto projektu umožňuje:
 - spolupráci s databází a FTP vrstvou  
 
 !!! info "Poznámka"
-    V zadání je uveden port 8080, ale v projektu je webový server mapován na port `80`, proto je hlavní aplikace dostupná přímo na adrese `http://localhost`
+    Webový server je mapován jako `8080:80`, proto je hlavní aplikace dostupná na adrese `http://localhost:8080`.

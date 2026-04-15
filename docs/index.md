@@ -68,8 +68,8 @@ Pro spuštění je potřeba:
 
 Volné porty:
 
-- **80** (web)  
-- **3306** (databáze)  
+- **8080** (web)
+- **3306** (databáze)
 - **2121** (FTP)  
 - **30000–30009** (FTP pasivní režim)  
 - **8081** (phpMyAdmin)  
@@ -81,12 +81,12 @@ Volné porty:
 
 Po spuštění projektu:
 
-- **Web** -> [http://localhost](http://localhost)
+- **Web** -> [http://localhost:8080](http://localhost:8080)
 - **phpMyAdmin** -> [http://localhost:8081](http://localhost:8081)
 - **Dokumentace** -> [http://localhost:8000](http://localhost:8000) 
 
 !!! info "Poznámka"
-    V zadání je uveden port 8080, ale v tomto projektu je webový server mapován na portu 80, proto je dostupný na `http://localhost`.
+    Webový server je v tomto projektu mapován jako `8080:80`, proto je dostupný na `http://localhost:8080`.
 
 ---
 
@@ -104,7 +104,7 @@ Projekt obsahuje tyto kontejnery:
 
 ## Popis služeb
 
-- **web (hostin_web)**
+- **web (hosting_web)**
 
     Apache + PHP server, který obsluhuje administrační aplikaci a zákaznické weby
 

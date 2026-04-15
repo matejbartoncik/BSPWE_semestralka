@@ -8,7 +8,7 @@ Tento dokument popisuje architekturu a konfiguraci kontejnerů definovaných v s
 Tato služba běží na vlastním Dockerfile (`docker/apache/Dockerfile`) a slouží jako hlavní webový server. Obsluhuje hlavní administrátorskou aplikaci i weby jednotlivých zákazníků.
 
 - **Kontejner:** `hosting_web`
-- **Port:** `80:80`
+- **Port:** `8080:80`
 - **Závislosti:** Závisí na běhu služby `db`.
 - **Zapojené volumes:**
   - `./app` -> `/var/www/html` - Hlavní administrátorská aplikace (dostupná na kořenové doméně).

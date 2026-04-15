@@ -216,7 +216,7 @@ docker compose up -d
 
 | Služba          | URL                                            |
 | --------------- | ---------------------------------------------- |
-| Web (admin app) | [http://localhost:80](http://localhost:80) |
+| Web (admin app) | [http://localhost:8080](http://localhost:8080) |
 | phpMyAdmin      | [http://localhost:8081](http://localhost:8081) |
 
 ---
@@ -235,7 +235,7 @@ docker compose down
 * ✅ Docker se spouští přes `docker compose` ve WSL
 * ❌ `.env` se **necommituje**
 * ✅ Committuje se jen `.env.example`
-* ✅ Porty držíme fixní (808 / 8081 / 3306 / 2121 …)
+* ✅ Porty držíme fixní (8080 / 8081 / 3306 / 2121 …)
 * ✅ Změny přes PR (žádné přímé push do `main`)
 
 ---
@@ -259,7 +259,7 @@ Viz krok 5 (docker group + `wsl --shutdown`)
 
 ---
 
-## C) „Nejde mi otevřít localhost:80“
+## C) „Nejde mi otevřít localhost:8080“
 
 Zkontroluj:
 
