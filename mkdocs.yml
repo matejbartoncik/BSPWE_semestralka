@@ -9,6 +9,7 @@ nav:
   - Databáze: DB.md
   - FTP: FTP.md
   - Web: WEB.md
+  - Docker Compose: DOCKER_COMPOSE.md
   - Jak na MkDocs: mkdocs_tutorial.md
   - Uživatelská příručka: USER_GUIDE.md
 
