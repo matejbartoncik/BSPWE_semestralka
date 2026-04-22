@@ -6,7 +6,7 @@ services:
     container_name: hosting_web
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./app:/var/www/html:rw
       # Zákaznické weby – subdoménový (customer.localhost) i adresářový (localhost:8080/~customer) hosting

@@ -74,8 +74,7 @@ function build_customer_url(string $customer): string
     $scheme = $isHttps ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
     
-    // Pro ukázku vždy použijeme jednoduchý subdoménový styl (např. customer.localhost)
-    return sprintf('%s://www.%s.cz/', $scheme, rawurlencode($customer));
+    return sprintf('%s://www.%s.vyvoj/', $scheme, rawurlencode($customer));
 }
 
 function build_phpmyadmin_url(): string
