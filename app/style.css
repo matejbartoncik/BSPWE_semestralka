@@ -130,6 +130,14 @@ button:hover,
     background: #5946d2;
 }
 
+.btn-danger {
+    background: #e74c3c;
+}
+
+.btn-danger:hover {
+    background: #cd3f31;
+}
+
 .btn-logout {
     color: #c0392b;
     text-decoration: none;
@@ -206,6 +214,22 @@ button:hover,
     gap: 6px;
 }
 
+.hosting-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.inline-form {
+    margin: 0;
+}
+
+.hosting-actions a,
+.hosting-actions button {
+    width: auto;
+}
+
 .hosting-item a,
 .info-box a {
     color: #2c80b9;
@@ -258,6 +282,15 @@ th {
 .note {
     margin-top: 12px;
     font-size: 0.9rem;
+}
+
+.warning-list {
+    margin: 12px 0 0;
+    padding-left: 18px;
+}
+
+.warning-list li + li {
+    margin-top: 6px;
 }
 
 @media (max-width: 900px) {

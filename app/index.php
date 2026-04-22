@@ -72,9 +72,11 @@ function build_customer_url(string $customer): string
 {
     $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
     $scheme = $isHttps ? 'https' : 'http';
-    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-    
-    return sprintf('%s://www.%s.vyvoj/', $scheme, rawurlencode($customer));
+    $port = (string) ($_SERVER['SERVER_PORT'] ?? '');
+    $defaultPort = $isHttps ? '443' : '80';
+    $portSuffix = ($port !== '' && $port !== $defaultPort) ? ':' . $port : '';
+
+    return sprintf('%s://%s.localhost%s/', $scheme, rawurlencode($customer), $portSuffix);
 }
 
 function build_phpmyadmin_url(): string
@@ -314,7 +316,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (($_POST['password'] ?? '') === ADMIN_PASSWORD) {
             unset($_SESSION['customer_name']);
             $_SESSION['admin_logged_in'] = true;
-            set_flash('success', 'Admin prihlaseni probehlo uspesne.');
+            set_flash('success', 'Admin přihlášení proběhlo úspěšně.');
         } else {
             set_flash('error', 'Spatne admin heslo.');
         }
@@ -339,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($matchedCustomer !== null) {
             unset($_SESSION['admin_logged_in']);
             $_SESSION['customer_name'] = $matchedCustomer;
-            set_flash('success', 'Prihlaseni do zakaznickeho portalu probehlo uspesne.');
+            set_flash('success', 'Přihlášení do zákaznického portálu proběhlo úspěšně.');
         } else {
             set_flash('error', 'Neplatne zakaznicke prihlasovaci udaje.');
         }
@@ -379,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'custo
             isset($_POST['clear_public'])
         );
 
-        set_flash('success', 'Na hosting bylo nahrano ' . $uploadedCount . ' souboru.');
+        set_flash('success', 'Na hosting bylo nahráno ' . $uploadedCount . ' souborů.');
     } catch (Throwable $exception) {
         set_flash('error', $exception->getMessage());
     }
@@ -430,6 +432,14 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
                         <?php endforeach; ?>
                     </div>
                     <p class="note">Tohle jsou vygenerované údaje pro zákazníka. Po refreshi už se znovu neukážou.</p>
+                <?php endif; ?>
+
+                <?php if (!empty($flash['details']['warnings']) && is_array($flash['details']['warnings'])): ?>
+                    <ul class="warning-list">
+                        <?php foreach ($flash['details']['warnings'] as $warning): ?>
+                            <li><?= escape((string) $warning) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
@@ -483,7 +493,13 @@ uasort($hostings, static fn(array $left, array $right): int => strcmp($left['cus
                                     <b><?= escape($hosting['customer']) ?></b>
                                     <span>Portál login: <?= escape($hosting['portal_user']) ?></span>
                                     <span>DB: <?= escape($hosting['db_name']) ?></span>
-                                    <a href="<?= escape(build_customer_url($hosting['customer'])) ?>" target="_blank" rel="noreferrer">Otevřít web</a>
+                                    <div class="hosting-actions">
+                                        <a href="<?= escape(build_customer_url($hosting['customer'])) ?>" target="_blank" rel="noreferrer">Otevřít web</a>
+                                        <form action="delete_hosting.php" method="post" class="inline-form" onsubmit="return confirm('Opravdu chces trvale smazat hosting?');">
+                                            <input type="hidden" name="customer_name" value="<?= escape($hosting['customer']) ?>">
+                                            <button type="submit" class="btn-danger">Smazat hosting</button>
+                                        </form>
+                                    </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>

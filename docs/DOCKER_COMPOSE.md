@@ -11,11 +11,10 @@ Tato služba běží na vlastním Dockerfile (`docker/apache/Dockerfile`) a slou
 - **Port:** `8080:80`
 - **Závislosti:** Závisí na běhu služby `db`.
 - **Zapojené volumes:**
-  - `./app` -> `/var/www/html` - Hlavní administrátorská aplikace (dostupná na kořenové doméně).
+  - `./app` -> `/var/www/html` - Hlavní administrátorská aplikace.
   - `./data/www` -> `/srv/www` - Úložiště pro data zákazníků. Sdíleno s FTP serverem.
   - `./docker/apache/000-default.conf` -> Nastavení virtuálních hostů Apache.
   - `./data/ftp/passwd` -> Soubor hesel FTP pro jejich správu.
-  - `/etc/hosts` -> Slouží pro dynamickou změnu DNS záznamů přímo z PHP kódu (vyžaduje oprávnění na hostitelském stroji).
 
 ### 2. `db` (MariaDB)
 Relační databázový server, který ukládá jak data pro samotnou aplikaci hostingu, tak případné databáze zákazníků.

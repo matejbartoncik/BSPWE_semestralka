@@ -5,18 +5,18 @@ services:
       dockerfile: docker/apache/Dockerfile
     container_name: hosting_web
     restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "8080:80"
     volumes:
       - ./app:/var/www/html:rw
-      # Zákaznické weby – subdoménový (customer.localhost) i adresářový (localhost:8080/~customer) hosting
+      # Zakaznicke weby - subdomeny (*.localhost) i adresarovy hosting (localhost:8080/~customer)
       - ./data/www:/srv/www:rw
       # apache config – pro nastavení virtual hostů, přesměrování atd.
       - ./docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
       # FTP - přístup k users db, pro manipulaci přes pure-pw
       - ./data/ftp/passwd:/etc/pure-ftpd/passwd:rw
-      # Dynamicka zmena zaznamu na hostitelskem stroji (vyzaduje chmod 666 /etc/hosts na hostiteli)
-      - /etc/hosts:/host_etc_hosts:rw
     depends_on:
       - db
     networks:
@@ -42,7 +42,6 @@ services:
     restart: unless-stopped
     environment:
       PUBLICHOST: "localhost"
-      # Pasivní porty (domluvený rozsah)
       ADDED_FLAGS: "--passiveportrange 30000:30009"
     volumes:
       - ./data/www:/home:rw

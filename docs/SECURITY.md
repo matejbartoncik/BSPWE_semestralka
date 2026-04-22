@@ -8,7 +8,7 @@ Tato stránka popisuje, jak je v projektu oddělená správa jednotlivých záka
 - Každý zákazník má vlastní složku: `/srv/www/{customer}/public`.
 - Upload z portálu zapisuje pouze do složky aktuálně přihlášeného zákazníka.
 - Při uploadu se čistí cesta souboru (`sanitize_relative_upload_path`) a zakazují se segmenty `.` a `..`.
-- Apache směruje doménu zákazníka jen do jeho vlastního `public` rootu (VirtualDocumentRoot).
+- Apache směruje adresu `/~{customer}` jen do vlastního `public` rootu zákazníka.
 
 ### Databáze
 - Pro každého zákazníka se tvoří samostatná DB (`cust{customer}db`) a DB účet (`cust{customer}`).

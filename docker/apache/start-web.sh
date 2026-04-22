@@ -16,9 +16,4 @@ chmod a+rw /srv/www/.hostings.json || true
 
 umask 0000
 
-# If host /etc/hosts is mounted, relax permissions for demo host-record updates.
-if [ -e /host_etc_hosts ]; then
-    chmod a+rw /host_etc_hosts || true
-fi
-
 exec apache2-foreground
