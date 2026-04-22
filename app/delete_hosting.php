@@ -91,7 +91,6 @@ function delete_ftp_user(string $customer): void
     );
 
     run_local_command($command);
-    run_local_command('pure-pw mkdb /etc/pure-ftpd/passwd/pureftpd.pdb -f /etc/pure-ftpd/passwd/pureftpd.passwd');
 }
 
 function customer_root_path(string $customer): string

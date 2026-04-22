@@ -36,9 +36,11 @@ services:
       - hosting_net
 
   ftp:
-    image: stilliard/pure-ftpd
+    build:
+      context: .
+      dockerfile: docker/ftp/Dockerfile
     container_name: hosting_ftp
-    command: /bin/sh -c "/run.sh -l puredb:/etc/pure-ftpd/passwd/pureftpd.pdb -E -j -R -P $$PUBLICHOST"
+    command: /start.sh
     restart: unless-stopped
     environment:
       PUBLICHOST: "localhost"
