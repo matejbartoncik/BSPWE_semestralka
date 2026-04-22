@@ -134,9 +134,6 @@ function create_ftp_user(string $customer, string $password): void
     );
 
     run_local_command($command);
-    
-    // Následná ruční kompilace do binární PDB databáze, na kterou teď FTP kontejner kouká
-    run_local_command('pure-pw mkdb /etc/pure-ftpd/passwd/pureftpd.pdb -f /etc/pure-ftpd/passwd/pureftpd.passwd');
 }
 
 function delete_ftp_user(string $customer): void
