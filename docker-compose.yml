@@ -6,11 +6,10 @@ services:
     container_name: hosting_web
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
-      # Admin app (zatím placeholder) – bude servírovaná na /
       - ./app:/var/www/html:rw
-      # Zákaznické weby – subdoménový (customer.localhost:8080) i adresářový (localhost:8080/~customer) hosting
+      # Zákaznické weby – subdoménový (customer.localhost) i adresářový (localhost:8080/~customer) hosting
       - ./data/www:/srv/www:rw
       # apache config – pro nastavení virtual hostů, přesměrování atd.
       - ./docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
